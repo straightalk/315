@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THREE FIFTEEN — Full Production Package</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap');
+
+  :root {
+    --red: #c0392b;
+    --gold: #d4a843;
+    --dark: #080808;
+    --mid: #141414;
+    --surface: #1c1c1c;
+    --border: #2a2a2a;
+    --text: #e0d8cc;
+    --muted: #888;
+    --dim: #444;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.75;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    background: rgba(8,8,8,0.96);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 40px;
+    display: flex;
+    gap: 28px;
+    z-index: 100;
+    flex-wrap: wrap;
+  }
+
+  nav a {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  nav a:hover { color: var(--red); }
+
+  /* HERO */
+  .hero {
+    background: var(--mid);
+    border-bottom: 1px solid var(--border);
+    padding: 80px 60px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '3:15';
+    position: absolute;
+    font-family: 'Oswald', sans-serif;
+    font-size: 320px;
+    font-weight: 700;
+    color: rgba(192,57,43,0.04);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .hero-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .hero h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(60px, 12vw, 120px);
+    font-weight: 700;
+    letter-spacing: 16px;
+    line-height: 0.9;
+    color: #fff;
+    margin-bottom: 24px;
+  }
+
+  .hero-meta {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .hero-meta span {
+    color: var(--gold);
+  }
+
+  .byline {
+    font-style: italic;
+    color: var(--muted);
+    font-size: 15px;
+    margin-top: 16px;
+  }
+
+  /* SECTIONS */
+  .section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 70px 40px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px;
+    letter-spacing: 5px;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .section h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 36px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    color: #fff;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+  }
+
+  p { margin-bottom: 16px; color: var(--text); }
+
+  /* LOGLINE */
+  .logline-box {
+    background: var(--surface);
+    border-left: 4px solid var(--red);
+    padding: 28px 32px;
+    margin: 30px 0;
+    font-size: 20px;
+    font-style: italic;
+    line-height: 1.6;
+    color: #fff;
+  }
+
+  /* CAST TABLE */
+  .cast-grid {
+    display: grid;
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  .cast-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 22px 26px;
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+
+  .cast-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .cast-role {
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .cast-desc {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* SCENE BREAKDOWN */
+  .scene-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+
+  .scene-header {
+    background: #222;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .scene-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--red);
+    text-transform: uppercase;
+  }
+
+  .scene-slug {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: #fff;
+    text-transform: uppercase;
+  }
+
+  .scene-time {
+    font-family: 'Oswald', sans-serif;
+    font-size: 22px;
+    color: var(--gold);
+    letter-spacing: 3px;
+  }
+
+  .scene-body {
+    padding: 24px;
+  }
+
+  .scene-body p { font-size: 15px; margin-bottom: 12px; }
+
+  .scene-meta {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+
+  .meta-chip {
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .meta-chip span {
+    color: var(--text);
+    margin-left: 6px;
+  }
+
+  /* SCRIPT SECTION */
+  .script-wrap {
+    font-family: 'Courier Prime', 'Courier New', monospace;
+    font-size: 13.5px;
+    line-height: 1.8;
+    background: #0f0f0f;
+    border: 1px solid var(--border);
+    padding: 50px 60px;
+    margin-top: 20px;
+  }
+
+  @media (max-width: 600px) {
+    .script-wrap { padding: 24px 16px; }
+  }
+
+  .sc-heading {
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 28px 0 8px;
+    border-left: 3px solid var(--red);
+    padding-left: 10px;
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+
+  .sc-action { color: #bbb; margin: 8px 0; }
+
+  .sc-char {
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #fff;
+    margin: 18px 0 0 35%;
+  }
+
+  .sc-paren {
+    margin-left: 28%;
+    font-style: italic;
+    color: #666;
+  }
+
+  .sc-dial {
+    margin: 2px 15% 0 20%;
+    color: #ddd;
+  }
+
+  .sc-trans {
+    text-align: right;
+    text-transform: uppercase;
+    color: #444;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 24px 0;
+  }
+
+  .sc-act {
+    font-family: 'Oswald', sans-serif;
+    font-size: 26px;
+    letter-spacing: 6px;
+    color: var(--red);
+    text-align: center;
+    margin: 40px 0 6px;
+  }
+
+  .sc-act-sub {
+    text-align: center;
+    font-style: italic;
+    color: #555;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  /* SHOT LIST */
+  .shot-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+    font-size: 14px;
+  }
+
+  .shot-table th {
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .shot-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #1e1e1e;
+    color: var(--text);
+    vertical-align: top;
+  }
+
+  .shot-table tr:hover td { background: #1a1a1a; }
+
+  .shot-num {
+    font-family: 'Oswald', sans-serif;
+    color: var(--red);
+    font-size: 12px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+
+  /* PRODUCTION BREAKDOWN */
+  .breakdown-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  @media (max-width: 600px) {
+    .breakdown-grid { grid-template-columns: 1fr; }
+    .cast-card { grid-template-columns: 1fr; }
+    .sc-char { margin-left: 20%; }
+    .sc-dial { margin-left: 10%; margin-right: 5%; }
+    .sc-paren { margin-left: 15%; }
+  }
+
+  .breakdown-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 24px;
+  }
+
+  .breakdown-card h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .breakdown-card ul {
+    list-style: none;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 2.2;
+  }
+
+  .breakdown-card ul li::before {
+    content: '— ';
+    color: var(--red);
+  }
+
+  /* SHOOTING SCHEDULE */
+  .day-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+
+  .day-header {
+    background: #222;
+    padding: 14px 22px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .day-header .location-tag {
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+
+  .day-body {
+    padding: 18px 22px;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 2;
+  }
+
+  .day-body strong { color: var(--text); }
+
+  /* BUDGET */
+  .budget-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+    font-size: 14px;
+  }
+
+  .budget-table th {
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .budget-table td {
+    padding: 11px 14px;
+    border-bottom: 1px solid #1e1e1e;
+    color: var(--text);
+  }
+
+  .budget-table .total td {
+    border-top: 1px solid var(--border);
+    color: var(--gold);
+    font-weight: 600;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 1px;
+  }
+
+  .budget-table .free { color: #4caf50; font-size: 12px; }
+
+  /* TAGLINE */
+  .closing {
+    text-align: center;
+    padding: 80px 40px;
+    background: var(--mid);
+  }
+
+  .closing .big {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(36px, 8vw, 80px);
+    font-weight: 700;
+    letter-spacing: 12px;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 30px;
+  }
+
+  .closing .tagline {
+    font-style: italic;
+    color: var(--muted);
+    font-size: 18px;
+    line-height: 2;
+    max-width: 500px;
+    margin: 0 auto 30px;
+  }
+
+  .closing .credit {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--red);
+    text-transform: uppercase;
+  }
+
+  hr.divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#logline">Logline</a>
+  <a href="#cast">Cast</a>
+  <a href="#scenes">Scenes</a>
+  <a href="#script">Full Script</a>
+  <a href="#shots">Shot List</a>
+  <a href="#schedule">Schedule</a>
+  <a href="#budget">Budget</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">Full Production Package</div>
+  <h1>THREE<br>FIFTEEN</h1>
+  <div class="hero-meta">A Short Film &nbsp;|&nbsp; <span>3 Parts</span> &nbsp;|&nbsp; Est. Runtime: 12–15 Min</div>
+  <div class="hero-meta" style="margin-top:8px;">Written &amp; Created by <span>Julio Flecha</span></div>
+  <div class="hero-meta" style="margin-top:8px;">Starring <span>Julio Flecha</span> as Marcus Webb</div>
+  <div class="byline">Every day at 3:00, a man races against the past to get to his daughter by 3:15.</div>
+</div>
+
+<!-- LOGLINE -->
+<div class="section" id="logline">
+  <div class="section-label">The Story</div>
+  <h2>Logline &amp; Synopsis</h2>
+
+  <div class="logline-box">
+    An ex-convict on parole has one unbreakable rule: pick up his eight-year-old daughter from school by 3:15 — or lose her forever. Over three days, the world keeps throwing him back toward who he was. He keeps choosing who he's trying to be.
+  </div>
+
+  <p><strong style="color:#fff;">Theme:</strong> Every person has a life worth living — rich or broke, saint or sinner, free or locked up. What you do with the time you've got is the whole story.</p>
+
+  <p>THREE FIFTEEN is a three-part short film told across three consecutive days in the life of Marcus Webb. Each day presents a different kind of test — his old crew, his old sins, his present obligations — and each day the clock is the same enemy: he has to be at Lincoln Elementary by 3:15. Not 3:30. Not 3:20. 3:15.</p>
+
+  <p>Because if he's late, his parole officer gets the call. And if that call comes, he loses custody. He loses Deja. He loses the one thing that made getting out worth it.</p>
+
+  <p>The film never leaves the neighborhood. It never needs to. The whole world is the two miles between wherever Marcus is at 3:00 PM and that school gate.</p>
+</div>
+
+<!-- CAST -->
+<div class="section" id="cast">
+  <div class="section-label">Characters</div>
+  <h2>Full Cast Breakdown</h2>
+
+  <div class="cast-grid">
+
+    <div class="cast-card">
+      <div>
+        <div class="cast-name">Julio Flecha</div>
+        <div class="cast-role">as Marcus Webb — Lead</div>
+      </div>
+      <div class="cast-desc">Mid-30s. Ex-convict, 4 years served. Father. Works at a warehouse. Quiet, watchful, with a storm underneath he keeps locked down. Every scene he's calculating time, distance, consequences. He doesn't talk much — his presence says everything. This is the man who did wrong and is doing the hard work of doing right with no applause, no audience, just a little girl who needs him at 3:15.</div>
+    </div>
+
+    <div class="cast-card">
+      <div>
+        <div class="cast-name">Deja Webb</div>
+        <div class="cast-role">Character — Supporting Lead</div>
+      </div>
+      <div class="cast-desc">8 years old. Smart, observant, loves her dad fiercely. She doesn't fully understand everything Marcus has been through but she understands that he shows up. Cast a real kid — natural, not coached. Her final line is the emotional gut punch of the whole film. She needs to say it like she means it, because she does.</div>
+    </div>
+
+    <div class="cast-card">
+      <div>
+        <div class="cast-name">Troy "T" Simmons</div>
+        <div class="cast-role">Character — Day One Antagonist</div>
+      </div>
+      <div class="cast-desc">Marcus's former crew leader. Charming, dangerous in a relaxed way — he's never in a hurry because he doesn't have anything at stake. He genuinely cares about Marcus in his own way, which makes him more dangerous than someone who doesn't. Drives a clean car. Dressed well. The life still looks good from the outside. That's the trap.</div>
+    </div>
+
+    <div class="cast-card">
+      <div>
+        <div class="cast-name">Lil Ray</div>
+        <div class="cast-role">Character — Day One Support</div>
+      </div>
+      <div class="cast-desc">Young, maybe 19-20. In the back seat of Troy's car. He looks up to Marcus without knowing why — something about Marcus reads like someone who's been through things and came back. Small role, but his reaction when Marcus walks away matters. He's watching to see what a man does.</div>
+    </div>
+
+    <div class="cast-card">
+      <div>
+        <div class="cast-name">Sandra Booker</div>
+        <div class="cast-role">Character — Day Two Antagonist</div>
+      </div>
+      <div class="cast-desc">Mid-30s. Her brother lost his eye in something Marcus was involved in years ago. She carries that weight. She didn't plan to confront Marcus — she saw him through a diner window and walked in on instinct. She's not villainous; she's wounded and honest. Her scene is the moral center of the film. She doesn't forgive him. That's real. But she sees him trying.</div>
+    </div>
+
+    <div class="cast-card">
+      <div>
+        <div class="cast-name">Mr. Hines</div>
+        <div class="cast-role">Character — Day Three Obstacle</div>
+      </div>
+      <div class="cast-desc">Marcus's warehouse supervisor. 50s. Has seen a hundred guys like Marcus and half of them didn't make it. He's not cruel — he's just running a business. When Marcus explains the stakes plainly and without excuses, Hines respects it. His "go" is one of the most important single words in the film.</div>
+    </div>
+
+    <div class="cast-card">
+      <div>
+        <div class="cast-name">Ms. Patterson</div>
+        <div class="cast-role">Character — Recurring Small Role</div>
+      </div>
+      <div class="cast-desc">Deja's teacher. Appears briefly at pickup on Day Two and Day Three. She's been watching Marcus show up every single day. By Day Three her nod says everything — she's seen fathers who don't, and she recognizes one who does.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SCENE BREAKDOWN -->
+<div class="section" id="scenes">
+  <div class="section-label">Story Structure</div>
+  <h2>Scene-by-Scene Breakdown</h2>
+
+  <!-- DAY ONE -->
+  <div class="scene-card">
+    <div class="scene-header">
+      <div>
+        <div class="scene-num">Part One — Monday</div>
+        <div class="scene-slug">"The Crew"</div>
+      </div>
+      <div class="scene-time">3:15</div>
+    </div>
+    <div class="scene-body">
+      <p><strong style="color:#fff;">Scene 1 — Establishing / School Sign</strong><br>Open on Lincoln Elementary. The dismissal sign. 3:30 PM. We hold on it. This number is the world.</p>
+      <p><strong style="color:#fff;">Scene 2 — City Bus</strong><br>Marcus on the bus. Phone reads 2:47. He's always calculating. We feel the math happening in his head before a word is spoken.</p>
+      <p><strong style="color:#fff;">Scene 3 — Crosstown Avenue / The Car</strong><br>Marcus walks. Troy's car rolls up. Troy plays it smooth — "ten minutes, old time's sake." Marcus stops. Turns. Explains the stakes without emotion: 3 o'clock, custody, cell. Troy's smirk disappears. Marcus walks. Lil Ray watches from the back seat.</p>
+      <p><strong style="color:#fff;">Scene 4 — School Gate, 3:05 PM</strong><br>Marcus arrives. Deja comes out. Runs to him. He holds on too long. She calls him on it. He laughs. End of Day One.</p>
+      <div class="scene-meta">
+        <div class="meta-chip">Locations <span>Bus / Street / School Gate</span></div>
+        <div class="meta-chip">Characters <span>Marcus, Troy, Lil Ray, Deja</span></div>
+        <div class="meta-chip">Est. Screen Time <span>3–4 min</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY TWO -->
+  <div class="scene-card">
+    <div class="scene-header">
+      <div>
+        <div class="scene-num">Part Two — Wednesday</div>
+        <div class="scene-slug">"The Debt"</div>
+      </div>
+      <div class="scene-time">3:15</div>
+    </div>
+    <div class="scene-body">
+      <p><strong style="color:#fff;">Scene 5 — Diner, 2:30 PM</strong><br>Marcus eats alone. He has time today — or he thinks he does. A text from Deja's teacher confirms pickup. He almost smiles.</p>
+      <p><strong style="color:#fff;">Scene 6 — The Confrontation</strong><br>Sandra Booker walks in. Sits down across from him without asking. Her brother lost his eye. Marcus doesn't deflect, doesn't run — he sits with it. "I'm sorry. Every day." She tells him she sees him trying. She doesn't forgive him. She leaves. That's real life — some debts don't get cleared. They just get carried differently.</p>
+      <p><strong style="color:#fff;">Scene 7 — Marcus checks his phone. 2:58 PM.</strong><br>He leaves a tip. He gets up. He goes.</p>
+      <p><strong style="color:#fff;">Scene 8 — School Gate, 3:08 PM</strong><br>Marcus is early. Ms. Patterson notices. He says he didn't want to cut it close. She nods. Deja comes out — surprised he's early. He says he just wanted to see her sooner.</p>
+      <div class="scene-meta">
+        <div class="meta-chip">Locations <span>Diner / School Gate</span></div>
+        <div class="meta-chip">Characters <span>Marcus, Sandra, Ms. Patterson, Deja</span></div>
+        <div class="meta-chip">Est. Screen Time <span>4–5 min</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY THREE -->
+  <div class="scene-card">
+    <div class="scene-header">
+      <div>
+        <div class="scene-num">Part Three — Friday</div>
+        <div class="scene-slug">"The Clock"</div>
+      </div>
+      <div class="scene-time">3:15</div>
+    </div>
+    <div class="scene-body">
+      <p><strong style="color:#fff;">Scene 9 — Warehouse, 2:30 PM</strong><br>Marcus works. Fast, disciplined. Mr. Hines approaches: Tony called out, truck coming at 3:30, he needs Marcus to stay. Marcus looks at the clock. 2:41. He explains the situation plainly — no drama, no excuses. Just facts: 3:15, P.O., custody. Done. Hines weighs it. Says go. Marcus promises a double. He moves.</p>
+      <p><strong style="color:#fff;">Scene 10 — Streets, 2:55 PM</strong><br>Marcus moves fast. Not running — running draws attention. But fast. He takes the shortcut through the alley — one he used to use for the wrong reasons. Different now. Same alley, different man.</p>
+      <p><strong style="color:#fff;">Scene 11 — School Gate, 3:02 PM</strong><br>He makes it. Leans on the fence. Breathes. The other parents have no idea what it took. The bell rings. Kids pour out. Deja walks to him this time — doesn't run. She's got something to say. She tells him her teacher asked who always picks her up. He asks what she said. <em>"You do. Every day."</em> He asks if her teacher asked if he was ever late. She says yes. He asks what she told her. She says: <em>"No. You're never late."</em> They walk. The camera stays on the school clock: 3:09 PM. Fade to black.</p>
+      <div class="scene-meta">
+        <div class="meta-chip">Locations <span>Warehouse / Street / School Gate</span></div>
+        <div class="meta-chip">Characters <span>Marcus, Mr. Hines, Deja, Ms. Patterson</span></div>
+        <div class="meta-chip">Est. Screen Time <span>4–5 min</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FULL SCRIPT -->
+<div class="section" id="script">
+  <div class="section-label">Full Screenplay</div>
+  <h2>THREE FIFTEEN — Complete Script</h2>
+
+  <div class="script-wrap">
+
+    <div style="text-align:center; margin-bottom:40px; font-family:'Oswald',sans-serif;">
+      <div style="font-size:48px; letter-spacing:10px; color:#fff; line-height:1;">THREE FIFTEEN</div>
+      <div style="font-size:11px; letter-spacing:4px; color:#666; margin-top:8px; text-transform:uppercase;">Written &amp; Created by Julio Flecha</div>
+      <div style="font-size:11px; letter-spacing:4px; color:#c0392b; margin-top:4px; text-transform:uppercase;">Starring Julio Flecha as Marcus Webb</div>
+    </div>
+
+    <div class="sc-act">PART ONE</div>
+    <div class="sc-act-sub">"The Crew" — Monday</div>
+
+    <div class="sc-heading">EXT. LINCOLN ELEMENTARY SCHOOL — ESTABLISHING — DAY</div>
+    <div class="sc-action">A modest elementary school. Chain-link fence. Kids' drawings in the windows. A sign reads: DISMISSAL 3:30 PM.</div>
+    <div class="sc-action">We hold on the sign. Then —</div>
+
+    <div class="sc-heading">INT. CITY BUS — MOVING — DAY</div>
+    <div class="sc-action">MARCUS WEBB (30s) sits near the window. Work boots. Clean clothes that have seen better days. A duffel bag between his knees. He stares at his phone. The screen reads: 2:47 PM.</div>
+    <div class="sc-action">He exhales. Watches the city pass. He's running the math. He's always running the math.</div>
+
+    <div class="sc-heading">EXT. CROSSTOWN AVENUE — CONTINUOUS — DAY</div>
+    <div class="sc-action">The bus stops. Marcus steps off. Walks with purpose — not fast enough to draw attention. Fast enough to mean it.</div>
+    <div class="sc-action">He passes a barbershop. A laundromat. A corner store with bars on the windows.</div>
+    <div class="sc-action">A car slows beside him.</div>
+
+    <div class="sc-char">TROY (O.S.)</div>
+    <div class="sc-paren">(from the car window)</div>
+    <div class="sc-dial">Marc. Yo, Marc. Come on, man, don't do me like that.</div>
+
+    <div class="sc-action">Marcus doesn't look. Keeps walking.</div>
+    <div class="sc-action">The car pulls to the curb. TROY "T" SIMMONS leans out — relaxed like time costs him nothing. LIL RAY in the back seat, nodding to music only he can hear.</div>
+
+    <div class="sc-char">TROY</div>
+    <div class="sc-dial">I know you hear me.</div>
+
+    <div class="sc-char">MARCUS</div>
+    <div class="sc-paren">(still walking)</div>
+    <div class="sc-dial">I'm on a schedule, T.</div>
+
+    <div class="sc-char">TROY</div>
+    <div class="sc-dial">Schedule. Look at you. Come on — ten minutes. We need you on something real quick. Old time's sake.</div>
+
+    <div class="sc-action">Marcus stops. Turns slowly. He looks at Troy. At the car. At Lil Ray in the back who gives him a little wave like they're cool.</div>
+
+    <div class="sc-char">MARCUS</div>
+    <div class="sc-dial">What time is it, T?</div>
+
+    <div class="sc-char">TROY</div>
+    <div class="sc-dial">What?</div>
+
+    <div class="sc-char">MARCUS</div>
+    <div class="sc-dial">What. Time. Is it.</div>
+
+    <div class="sc-action">Troy checks his phone. Shrugs.</div>
+
+    <div class="sc-char">TROY</div>
+    <div class="sc-dial">Like... two fifty-something. Why?</div>
+
+    <div class="sc-char">MARCUS</div>
+    <div class="sc-dial">Because I got somewhere to be at three o'clock. And if I'm not there by three-fifteen, I don't go back to just walking around. I go back to a cell. You understand what I'm telling you?</div>
+
+    <div class="sc-action">Silence. Troy's smirk fades.</div>
+
+    <div class="sc-char">TROY</div>
+    <div class="sc-dial">It's just ten minutes, bro —</div>
+
+    <div class="sc-char">MARCUS</div>
+    <div class="sc-dial">It ain't ten minutes. It never was just ten minutes with you. That's why I did four years.</div>
+
+    <div class="sc-action">That lands. Even Lil Ray goes still in the back seat.</div>
+
+    <div class="sc-char">MARCUS (CONT'D)</div>
+    <div class="sc-dial">I love you, man. But I can't. I gotta go.</div>
+
+    <div class="sc-action">Marcus turns and walks. Troy watches him go. A long beat.</div>
+
+    <div class="sc-char">LIL RAY</div>
+    <div class="sc-paren">(quiet)</div>
+    <div class="sc-dial">Where he going?</div>
+
+    <div class="sc-char">TROY</div>
+    <div class="sc-paren">(long beat)</div>
+    <div class="sc-dial">To get his daughter.</div>
+
+    <div class="sc-heading">EXT. LINCOLN ELEMENTARY — 3:05 PM</div>
+    <div class="sc-action">Marcus rounds the corner. A cluster of parents and grandparents wait by the gate. He finds his spot. Catches his breath.</div>
+    <div class="sc-action">The doors open. Kids pour out. And then — DEJA (8). Backpack bigger than she is. She scans the crowd. The second she spots Marcus her whole face breaks open.</div>
+
+    <div class="sc-char">DEJA</div>
+    <div class="sc-dial">Daddy!</div>
+
+    <div class="sc-action">She runs. He catches her. Lifts her up. Holds on a beat longer than she expects.</div>
+
+    <div class="sc-char">DEJA (CONT'D)</div>
+    <div class="sc-dial">You're squishing me.</div>
+
+    <div class="sc-char">MARCUS</div>
+    <div class="sc-paren">(laughing softly)</div>
+    <div class="sc-dial">I know. I know.</div>
+
+    <div class="sc-trans">CUT TO BLACK. / 3:15</div>
+
+    <hr class="divider">
+
+    <div class="sc-act">PART TWO</div>
+    <div class="sc-act-sub">"The Debt" — Wednesday</div>
+
+    <div class="sc-heading">INT. DINER — 2:30 PM — DAY</div>
+    <div class="sc-action">Marcus eats alone. A cheap meal. He's got an hour before he needs to move. He's looking at his phone — a text from Deja's teacher confirming pickup. He almost smiles.</div>
+    <div class="sc-action">A shadow falls across his table.</div>
+    <div class="sc-action">SANDRA BOOKER (mid-30s) stands over him. She's carrying grocery bags. She looks like she didn't plan this — she just saw him through the window and her legs made the decision.</div>
+
+    <div class="sc-char">SANDRA</div>
+    <div class="sc-paren">(barely holding it)</div>
+    <div class="sc-dial">Marcus.</div>
+
+    <div class="sc-action">He goes still. He knows exactly who she is and what he owes her.</div>
+
+    <div class="sc-char">MARCUS</div>
+    <div class="sc-dial">Sandra.</div>
+
+    <div class="sc-action">She sits down across from him. Doesn't ask. Just does. Sets her bags down like she's been carrying them for years.</div>
+
+    <div class="sc-char">SANDRA</div>
+    <div class="sc-dial">I told myself if I ever saw you I'd have something to say. A whole speech. I practiced it.</div>
+
+    <div class="sc-char">MARCUS</div>
+    <div class="sc-dial">Okay.</div>
+
+    <div class="sc-char">SANDRA</div>
+    <div class="sc-dial">My brother lost his eye, Marcus.</div>
+
+    <div class="sc-char">MARCUS</div>
+    <div class="sc-paren">(quietly)</div>
+    <div class="sc-dial">I know.</div>
+
+    <div class="sc-char">SANDRA</div>
+    <div class="sc-dial">He was nineteen. You know what nineteen looks like when somebody takes something from you that doesn't grow back?</div>
+
+    <div class="sc-action">Marcus doesn't deflect. He sits with it.</div>
+
+    <div class="sc-char">MARCUS</div>
+    <div class="sc-dial">I'm sorry. And I know that's not enough. There's nothing I can say that makes it right. I just... I am sorry. Every day.</div>
+
+    <div class="sc-action">Sandra stares at him. Looking for the lie. She doesn't find it.</div>
+
+    <div class="sc-char">SANDRA</div>
+    <div class="sc-dial">You got kids?</div>
+
+    <div class="sc-char">MARCUS</div>
+    <div class="sc-dial">A daughter. Eight.</div>
+
+    <div class="sc-char">SANDRA</div>
+    <div class="sc-dial">Then you know what it means to have somebody need you.</div>
+
+    <div class="sc-char">MARCUS</div>
+    <div class="sc-dial">Yes ma'am.</div>
+
+    <div class="sc-action">A long silence. Sandra picks up her bags. Stands.</div>
+
+    <div class="sc-char">SANDRA</div>
+    <div class="sc-dial">I don't forgive you. I'm not there yet. But I see you sitting here eating a five-dollar plate trying to be somebody. So I'm gonna let you do that.</div>
+
+    <div class="sc-action">She walks out. Marcus watches her go. His jaw tight.</div>
+    <div class="sc-action">His phone buzzes. 2:58 PM.</div>
+    <div class="sc-action">He leaves a tip. Gets up. Goes.</div>
+
+    <div class="sc-heading">EXT. LINCOLN ELEMENTARY — 3:08 PM</div>
+    <div class="sc-action">Marcus is there. Earlier than usual. He stands at the fence, hands in his pockets, eyes on the door.</div>
+    <div class="sc-action">MS. PATTERSON, Deja's teacher, notices and comes over.</div>
+
+    <div class="sc-char">MS. PATTERSON</div>
+    <div class="sc-dial">Mr. Webb. You're early today.</div>
+
+    <div class="sc-char">MARCUS</div>
+    <div class="sc-dial">Didn't want to cut it close.</div>
+
+    <div class="sc-action">She studies him a moment. Nods once. The bell rings. Deja comes out and breaks into a run when she sees him.</div>
+
+    <div class="sc-char">DEJA</div>
+    <div class="sc-dial">You're early!</div>
+
+    <div class="sc-char">MARCUS</div>
+    <div class="sc-dial">I know.</div>
+
+    <div class="sc-char">DEJA</div>
+    <div class="sc-dial">Why?</div>
+
+    <div class="sc-char">MARCUS</div>
+    <div class="sc-paren">(takes her hand)</div>
+    <div class="sc-dial">Just wanted to see you sooner.</div>
+
+    <div class="sc-trans">CUT TO BLACK. / 3:15</div>
+
+    <hr class="divider">
+
+    <div class="sc-act">PART THREE</div>
+    <div class="sc-act-sub">"The Clock" — Friday</div>
+
+    <div class="sc-heading">INT. WAREHOUSE — 2:30 PM — DAY</div>
+    <div class="sc-action">Marcus works fast. Loading crates, moving freight. He's good at this — the discipline of it.</div>
+    <div class="sc-action">MR. HINES (50s) approaches with a clipboard.</div>
+
+    <div class="sc-char">MR. HINES</div>
+    <div class="sc-dial">Webb. I need you to stay on. Tony called out sick, full truck coming in at three-thirty.</div>
+
+    <div class="sc-action">Marcus checks the wall clock. 2:41 PM.</div>
+
+    <div class="sc-char">MARCUS</div>
+    <div class="sc-dial">Mr. Hines, I can't. My daughter —</div>
+
+    <div class="sc-char">MR. HINES</div>
+    <div class="sc-dial">I know about your daughter. I'm telling you I need a body.</div>
+
+    <div class="sc-char">MARCUS</div>
+    <div class="sc-dial">I hear you. And I want to help. But if I'm not at that school by three-fifteen, they call my P.O. It's in the custody agreement. I'm not asking for a favor. I'm telling you what happens if I stay.</div>
+
+    <div class="sc-action">Mr. Hines looks at him. Long. He's heard excuses before. This doesn't sound like one.</div>
+
+    <div class="sc-char">MR. HINES</div>
+    <div class="sc-dial">You telling me you'll be back after?</div>
+
+    <div class="sc-char">MARCUS</div>
+    <div class="sc-dial">Four o'clock. I'll work a double if you need it. Weekends too. But I can't miss three o'clock.</div>
+
+    <div class="sc-action">Hines taps his clipboard. Decision made.</div>
+
+    <div class="sc-char">MR. HINES</div>
+    <div class="sc-dial">Go. Four o'clock.</div>
+
+    <div class="sc-char">MARCUS</div>
+    <div class="sc-dial">Thank you.</div>
+
+    <div class="sc-heading">EXT. STREETS — MOVING — 2:55 PM</div>
+    <div class="sc-action">Marcus moves fast. Not running — running draws attention. But fast. He checks his phone. 2:58. He cuts through an alley. The same shortcut he used to use for the wrong reasons. Different man now. Same alley.</div>
+
+    <div class="sc-heading">EXT. LINCOLN ELEMENTARY — 3:02 PM</div>
+    <div class="sc-action">He makes it. Leans against the fence. Breathes. Lets the adrenaline settle.</div>
+    <div class="sc-action">The other parents don't know. Don't know what it took to be standing exactly here.</div>
+    <div class="sc-action">The bell rings. Marcus stands straight.</div>
+    <div class="sc-action">Kids flood out. Deja finds him in two seconds flat. She walks this time instead of running. Like she's got something to tell him.</div>
+
+    <div class="sc-char">DEJA</div>
+    <div class="sc-dial">Daddy. My teacher asked me who always picks me up.</div>
+
+    <div class="sc-char">MARCUS</div>
+    <div class="sc-dial">Yeah? What'd you say?</div>
+
+    <div class="sc-char">DEJA</div>
+    <div class="sc-dial">I said you do. Every day.</div>
+
+    <div class="sc-action">Marcus looks at her. Something in his chest shifts.</div>
+
+    <div class="sc-char">MARCUS</div>
+    <div class="sc-dial">That's right.</div>
+
+    <div class="sc-char">DEJA</div>
+    <div class="sc-dial">She asked if you were ever late.</div>
+
+    <div class="sc-char">MARCUS</div>
+    <div class="sc-dial">What'd you tell her?</div>
+
+    <div class="sc-char">DEJA</div>
+    <div class="sc-paren">(matter of fact)</div>
+    <div class="sc-dial">I said no. You're never late.</div>
+
+    <div class="sc-action">Marcus nods. Takes her hand. They start walking.</div>
+    <div class="sc-action">The camera holds on the school behind them. The clock above the entrance: 3:09 PM.</div>
+    <div class="sc-action">They walk until we can't see them anymore.</div>
+
+    <div class="sc-trans">FADE TO BLACK.</div>
+    <div style="text-align:center; font-family:'Oswald',sans-serif; font-size:36px; letter-spacing:8px; color:#fff; margin:30px 0 10px;">THREE FIFTEEN</div>
+    <div style="text-align:center; font-style:italic; color:#555; font-size:14px; line-height:2;">
+      No matter where you come from.<br>
+      No matter what you've done.<br>
+      You show up.<br><br>
+      — END —
+    </div>
+
+  </div>
+</div>
+
+<!-- SHOT LIST -->
+<div class="section" id="shots">
+  <div class="section-label">Cinematography</div>
+  <h2>Shot List</h2>
+  <p>Lean and cinematic. Shoot it like it's expensive even if it's not. Every shot has a reason.</p>
+
+  <table class="shot-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Scene</th>
+        <th>Shot Type</th>
+        <th>Description / Purpose</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="shot-num">01</td><td>Open</td><td>CLOSE — School Sign</td><td>Hold on "3:30 PM." Burn the number into the audience before we see a single person.</td></tr>
+      <tr><td class="shot-num">02</td><td>Bus</td><td>CLOSE — Phone Screen</td><td>2:47 PM. First time we see the clock as a character.</td></tr>
+      <tr><td class="shot-num">03</td><td>Bus</td><td>MEDIUM — Marcus at window</td><td>City moving behind him. His face doing the math. No dialogue needed.</td></tr>
+      <tr><td class="shot-num">04</td><td>Street</td><td>WIDE — Following Marcus</td><td>Track from behind as he walks. Purposeful gait. Establishes his neighborhood.</td></tr>
+      <tr><td class="shot-num">05</td><td>Street</td><td>LOW — Car rolling</td><td>Troy's car from the ground level. It feels like a threat before we know it isn't.</td></tr>
+      <tr><td class="shot-num">06</td><td>Street</td><td>TWO-SHOT — Marcus &amp; Troy</td><td>Marcus standing, Troy leaning from the window. Power dynamic clear.</td></tr>
+      <tr><td class="shot-num">07</td><td>Street</td><td>CLOSE — Marcus's face</td><td>When he says "four years." Hold it. Don't cut away.</td></tr>
+      <tr><td class="shot-num">08</td><td>Street</td><td>CLOSE — Lil Ray's face</td><td>Watching Marcus walk away. He's learning something he doesn't have words for yet.</td></tr>
+      <tr><td class="shot-num">09</td><td>School Gate</td><td>WIDE — Gate crowd</td><td>Marcus blending into the ordinary world of parents. He belongs here now.</td></tr>
+      <tr><td class="shot-num">10</td><td>School Gate</td><td>HANDHELD — Deja running</td><td>Follow her energy. This is the release valve. Let it breathe.</td></tr>
+      <tr><td class="shot-num">11</td><td>Diner</td><td>MEDIUM — Marcus eating</td><td>Solitary but content. Rare quiet moment. Establish before it's broken.</td></tr>
+      <tr><td class="shot-num">12</td><td>Diner</td><td>OVER-SHOULDER — Sandra</td><td>Her POV of Marcus. We see him the way she sees him — small, human, trying.</td></tr>
+      <tr><td class="shot-num">13</td><td>Diner</td><td>CLOSE — Marcus listening</td><td>Do not cut during Sandra's speech about her brother. Let him receive it fully.</td></tr>
+      <tr><td class="shot-num">14</td><td>Diner</td><td>WIDE — Sandra walking out</td><td>Marcus alone at the table. Let it sit for three full seconds.</td></tr>
+      <tr><td class="shot-num">15</td><td>Diner</td><td>CLOSE — Phone, 2:58 PM</td><td>Clock forcing him back into motion. Life doesn't wait for grief.</td></tr>
+      <tr><td class="shot-num">16</td><td>Warehouse</td><td>WIDE — Marcus working</td><td>Establish the physical world. He's good at this. Skilled. Capable.</td></tr>
+      <tr><td class="shot-num">17</td><td>Warehouse</td><td>CLOSE — Wall clock, 2:41</td><td>He sees it the second Hines speaks. The count is always running.</td></tr>
+      <tr><td class="shot-num">18</td><td>Warehouse</td><td>TWO-SHOT — Marcus &amp; Hines</td><td>Equal level. Marcus isn't begging. He's negotiating from facts.</td></tr>
+      <tr><td class="shot-num">19</td><td>Alley</td><td>HANDHELD — Marcus moving</td><td>Tight, urgent. Same alley, new man. Let the camera feel the urgency.</td></tr>
+      <tr><td class="shot-num">20</td><td>School Gate</td><td>WIDE — Marcus leaning on fence</td><td>He made it. He breathes. We breathe with him.</td></tr>
+      <tr><td class="shot-num">21</td><td>School Gate</td><td>CLOSE — Clock above school</td><td>3:09 PM. He had time. He always makes time.</td></tr>
+      <tr><td class="shot-num">22</td><td>School Gate</td><td>WIDE — Marcus &amp; Deja walking</td><td>Final image. Hold until they disappear. Don't cut early. Let the audience sit in it.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- PRODUCTION BREAKDOWN -->
+<div class="section" id="schedule">
+  <div class="section-label">Production</div>
+  <h2>What You Need to Make This</h2>
+
+  <div class="breakdown-grid">
+    <div class="breakdown-card">
+      <h3>Locations (5 Total)</h3>
+      <ul>
+        <li>Elementary school exterior (gate + clock visible)</li>
+        <li>City bus interior or bus stop</li>
+        <li>Urban street / neighborhood block</li>
+        <li>Small diner or restaurant</li>
+        <li>Warehouse or loading dock interior</li>
+      </ul>
+    </div>
+    <div class="breakdown-card">
+      <h3>Cast Needed</h3>
+      <ul>
+        <li>Julio Flecha — Marcus (lead, every scene)</li>
+        <li>1 girl, age 7–9 — Deja</li>
+        <li>1 male actor — Troy</li>
+        <li>1 young male — Lil Ray</li>
+        <li>1 female actor — Sandra</li>
+        <li>1 older male — Mr. Hines</li>
+        <li>1 female — Ms. Patterson</li>
+        <li>Background extras (school parents, warehouse workers)</li>
+      </ul>
+    </div>
+    <div class="breakdown-card">
+      <h3>Crew (Minimum)</h3>
+      <ul>
+        <li>Director (can be Julio)</li>
+        <li>1 Camera operator</li>
+        <li>1 Sound person (boom mic)</li>
+        <li>1 PA / assistant</li>
+        <li>Optional: 1 editor</li>
+      </ul>
+    </div>
+    <div class="breakdown-card">
+      <h3>Equipment</h3>
+      <ul>
+        <li>DSLR or mirrorless camera (Sony, Canon, etc.)</li>
+        <li>50mm lens + wide lens</li>
+        <li>Handheld rig or gimbal</li>
+        <li>Directional microphone / lav mics</li>
+        <li>Portable LED light panel (1–2)</li>
+        <li>Editing software (DaVinci Resolve — free)</li>
+      </ul>
+    </div>
+    <div class="breakdown-card">
+      <h3>Props</h3>
+      <ul>
+        <li>Marcus's duffel bag</li>
+        <li>Deja's oversized backpack</li>
+        <li>Clipboard (Mr. Hines)</li>
+        <li>Sandra's grocery bags</li>
+        <li>Smartphones (period appropriate)</li>
+        <li>Warehouse crates / freight</li>
+      </ul>
+    </div>
+    <div class="breakdown-card">
+      <h3>Wardrobe Notes</h3>
+      <ul>
+        <li>Marcus: work boots, worn but clean clothes. Nothing flashy. Nothing prison. Trying.</li>
+        <li>Troy: clean. Fresh. The life still looks good. That's the trap.</li>
+        <li>Sandra: everyday woman. Grocery bags. Real life.</li>
+        <li>Deja: school clothes, bright colors — she's the light in his world.</li>
+        <li>Mr. Hines: supervisor vest or clipboard. Authority but not a suit.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 style="margin-top:50px;">Suggested Shooting Schedule</h2>
+
+  <div class="day-card">
+    <div class="day-header">
+      <span>Shoot Day 1</span>
+      <span class="location-tag">Location: School Exterior + Street</span>
+    </div>
+    <div class="day-body">
+      <strong>Morning:</strong> Shoot all school gate scenes — all three days' pickups back to back while you have the location. Get wide, medium, and close versions of each.<br>
+      <strong>Afternoon:</strong> Shoot the street / Troy's car scene. Natural light hits different late afternoon — use it.<br>
+      <strong>Notes:</strong> You need real kids exiting the school. Coordinate with a local school or shoot on a weekend with kid extras.
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header">
+      <span>Shoot Day 2</span>
+      <span class="location-tag">Location: Diner + Bus/Bus Stop</span>
+    </div>
+    <div class="day-body">
+      <strong>Morning:</strong> Diner scene — Sandra and Marcus. This is your most dialogue-heavy scene. Give it time. Run it multiple takes. Sandra's final line needs to land perfectly.<br>
+      <strong>Afternoon:</strong> Bus interior or bus stop. Simple shots. Marcus's face. The clock on the phone.
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header">
+      <span>Shoot Day 3</span>
+      <span class="location-tag">Location: Warehouse + Alley</span>
+    </div>
+    <div class="day-body">
+      <strong>Morning:</strong> Warehouse — Marcus working, the Hines conversation. If you can't get a real warehouse, a loading dock, storage facility, or even a large garage with equipment can work.<br>
+      <strong>Afternoon:</strong> Alley walk — handheld, fast, urgent. Simple to shoot but crucial to the pace of Part Three.
+    </div>
+  </div>
+</div>
+
+<!-- BUDGET -->
+<div class="section" id="budget">
+  <div class="section-label">Finance</div>
+  <h2>Low-Budget Estimate</h2>
+  <p>This film can be made for almost nothing if your cast and crew are friends, family, and community. Here's a realistic breakdown:</p>
+
+  <table class="budget-table">
+    <thead>
+      <tr><th>Item</th><th>Notes</th><th>Est. Cost</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Camera / Lens rental (3 days)</td><td>Local rental house or a friend's DSLR</td><td>$0 – $300</td></tr>
+      <tr><td>Sound equipment</td><td>Rode VideoMicro or borrow</td><td>$0 – $100</td></tr>
+      <tr><td>Locations</td><td>Ask, don't pay — local school, diner, warehouse</td><td>$0 – $200</td></tr>
+      <tr><td>Cast (non-union)</td><td>Friends, local talent, deferred pay</td><td>$0 – $500</td></tr>
+      <tr><td>Food / Craft Services (3 shoot days)</td><td>Feed your crew — this is non-negotiable</td><td>$150 – $400</td></tr>
+      <tr><td>Wardrobe</td><td>Mostly what actors own</td><td>$0 – $100</td></tr>
+      <tr><td>Props</td><td>Duffel bag, backpack, clipboard — likely own</td><td>$0 – $50</td></tr>
+      <tr><td>Editing Software</td><td>DaVinci Resolve is free</td><td class="free">FREE</td></tr>
+      <tr><td>Music / Score</td><td>License free music via YouTube Audio Library or local artist</td><td>$0 – $200</td></tr>
+      <tr><td>Color Grading</td><td>DaVinci Resolve (free) or hire a colorist</td><td>$0 – $300</td></tr>
+      <tr class="total"><td colspan="2">TOTAL RANGE</td><td>$150 – $2,150</td></tr>
+    </tbody>
+  </table>
+
+  <p style="margin-top:24px; color:var(--muted); font-size:15px;">This is a $150 film or a $2,000 film depending on your resources. The story doesn't change. <em>The story is already there.</em></p>
+</div>
+
+<!-- CLOSING -->
+<div class="closing">
+  <div class="big">THREE<br>FIFTEEN</div>
+  <div class="tagline">
+    No matter where you come from.<br>
+    No matter what you've done.<br>
+    No matter if you're rich or broke,<br>smart or not, free or locked up.<br><br>
+    Everybody has a life.<br>
+    You show up for yours.
+  </div>
+  <div class="credit">Written &amp; Created by Julio Flecha &nbsp;·&nbsp; Starring Julio Flecha as Marcus Webb</div>
+</div>
+
+</body>
+</html>
